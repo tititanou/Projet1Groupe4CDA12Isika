@@ -15,6 +15,11 @@ public class Main {
 			arbre.supprimer("Ahmed");
 			arbre.supprimer("Coralie");
 			arbre.afficherArbre();
+			arbre.ajouter("Tania");
+			arbre.afficherArbre();
+			arbre.modifier("Tania", "Cheyma");
+			arbre.afficherArbre();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
