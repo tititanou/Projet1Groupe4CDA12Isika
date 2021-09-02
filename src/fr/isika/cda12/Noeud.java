@@ -42,4 +42,14 @@ public class Noeud {
 
 	public void setFd(Noeud fd) {
 		this.fd = fd;
-	}}
+	}
+	
+	public void afficherNoeud() {
+		  
+	  	System.out.println(this.toString());
+	  	if (this.fg != null)  this.fg.afficherNoeud();
+	  	if (this.fd != null)  this.fd.afficherNoeud();
+	  	
+	}
+	
+}

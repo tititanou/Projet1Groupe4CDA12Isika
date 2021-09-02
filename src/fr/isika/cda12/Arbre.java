@@ -2,17 +2,19 @@ package fr.isika.cda12;
 
 
 	import java.io.File;
+
     import java.io.IOException;
 	import java.util.Scanner;
+
 	
 	
 	  
 	public class Arbre {
 	    private Noeud racine;
 	    
-	    public Arbre() {}
+	   // public Arbre() {}
 	    
-	    public Arbre(String noms)  throws IOException {
+	    public Arbre()  throws IOException {
 		construire("assets/noms.txt");	
 	    }
 	    
@@ -60,5 +62,33 @@ package fr.isika.cda12;
 		    ecrireListeTriee(rac.getFd());
 		}		
 	    }
+	    
+	    public void afficherArbre() {
+	      	 System.out.println("Affichage de l'arbre :\n\n");
+	      	 afficherNoeud(racine,0,hauteur());
+	      	 System.out.println();
+	       }
+	       
+	       
+	       public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel ) {
+	      	
+	      	 if (currentNoeud != null) {
+	      		 afficherNoeud(currentNoeud.getFg(), currentLevel+1, maxLevel);
+	      	   for (int i = 0; i < (maxLevel - currentLevel-1); i++) {
+	              // System.out.print("       ");
+	             }
+	      	   System.out.println(currentNoeud.getMot());
+	      	   afficherNoeud(currentNoeud.getFd(), currentLevel+1, maxLevel);
+	      	 }else {
+	      		 if (currentLevel < maxLevel) {
+	      			 afficherNoeud(null, currentLevel+1, maxLevel);
+	      			// System.out.println("");
+	      			 afficherNoeud(null, currentLevel+1, maxLevel);
+	      		 }
+	      	 }
+	      		
+	       }
+	    
+	    
 	}	  
 
