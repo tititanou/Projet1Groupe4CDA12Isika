@@ -13,7 +13,9 @@ public class importFile {
 		
 	
     try {
-    	File myObj = new File("C:\\develops\\outils\\Workspace\\Projet1\\Projet1Groupe4CDA12Isika\\assets\\noms.txt");
+    	File file = new File("assets/noms.txt");
+    	String path = file.getAbsolutePath();
+    	File myObj = new File(path);
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
         String data = myReader.nextLine();
