@@ -125,7 +125,7 @@ package fr.isika.cda12;
 	   	   public Noeud supprimerRacine(Noeud currentNoeud){
 		    	
 		    	
-		    	 if (currentNoeud.getFg() == null && currentNoeud.getFd() == null) {System.out.println("feuille\n"); return null ;}
+		    	 if (currentNoeud.getFg() == null && currentNoeud.getFd() == null) {System.out.println(""); return null ;}
 		    	 else if (currentNoeud.getFg() != null && currentNoeud.getFd() == null) return currentNoeud.getFg();
 		    	 else if (currentNoeud.getFg() == null && currentNoeud.getFd()!= null) return currentNoeud.getFd();
 		    	 else {
