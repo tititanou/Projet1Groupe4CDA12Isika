@@ -2,52 +2,60 @@ package fr.isika.cda12;
 
 import java.io.*;
 import java.util.*;
-import java.nio.file.*;
-import java.nio.charset.*;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class FileManager {
 
-	public static void main(String[] args) {
-
+	public static void readFile(String fileName) {
+		
+		File file = new File(fileName);
+		Scanner myReader;
 		try {
-
-			String content = "\nCeci est le contenu ajouté au fichier";
-
-			File file = new File("assets/noms.txt");
-			Scanner myReader = new Scanner(file);
+			myReader = new Scanner(file);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
 				System.out.println(data);
 			}
 			myReader.close();
-			// créer le fichier s'il n'existe pas
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-
-			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(content);
-			bw.close();
-
-			System.out.println("Modification terminée!");
-
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Echec de la lecture du fichier");
+			alert.setContentText("Un problème est survenu avec le fichier!");
+		}
+	}
+	
+	public static void updateFile(String fileName, String newData) {
+		
+		File file = new File(fileName);
+		try {
+		if (!file.exists()) {
+			file.createNewFile();
 		}
 
-		/*
-		 * try { List<String> lines = Arrays.asList("NOUVEAU", "PRENOM"); File file =
-		 * new File("assets/noms.txt"); Path path = Paths.get("assets/noms.txt");
-		 * //String path = file.getAbsolutePath(); File myObj = new
-		 * File("assets/noms.txt"); Scanner myReader = new Scanner(myObj); while
-		 * (myReader.hasNextLine()) { String data = myReader.nextLine();
-		 * System.out.println(data); } Files.write(path, lines, StandardCharsets.UTF_8,
-		 * StandardOpenOption.WRITE); Scanner myReaderB = new Scanner(myObj); while
-		 * (myReaderB.hasNextLine()) { String data = myReaderB.nextLine();
-		 * System.out.println(data); } myReader.close(); } catch (Exception e) {
-		 * System.out.println("An error occurred."); e.printStackTrace(); }
-		 */
+		FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+		BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("\n" + newData);
+			bw.close();
 
+			//Alert alert = new Alert(AlertType.CONFIRMATION);
+			//alert.setHeaderText("Modification du fichier");
+			//alert.setContentText("Votre fichier a été modifié avec succès");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			//Alert alert = new Alert(AlertType.ERROR);
+			//alert.setHeaderText("Echec de la modification du fichier");
+			//alert.setContentText("Un problème est survenu avec l'écriture du fichier!");
+		}
 	}
+	//Pour tester décommenter la méthode main
+	/*public static void main(String[] args) {
+
+		readFile("assets/noms.txt");
+		updateFile("assets/noms.txt", "Phil");
+
+	}*/
 }
