@@ -6,8 +6,8 @@ package fr.isika.cda12;
     import java.io.IOException;
 	import java.util.Scanner;
 
-	
-	
+
+
 	  
 	public class Arbre {
 	    private Noeud racine;
@@ -18,25 +18,25 @@ package fr.isika.cda12;
 		construire("assets/noms.txt");	
 	    }
 	    
-	    public void inserer(String mot) {
-		racine = inserer(racine, mot);
+	    public void ajouter(String mot) {
+		racine = ajouter(racine, mot);
 	    }
 	    
-	    public Noeud inserer(Noeud rac, String mot ) {
+	    public Noeud ajouter (Noeud rac, String mot ) {
 		if (rac == null) {
 		    Noeud nouveau = new Noeud(mot);
 		    return nouveau;
 		}
-		if (mot.compareTo(rac.getMot()) < 0) rac.setFg(inserer(rac.getFg(), mot));
+		if (mot.compareTo(rac.getMot()) < 0) rac.setFg(ajouter (rac.getFg(), mot));
 		else if (mot.compareTo(rac.getMot()) == 0) rac.setNbOcc(rac.getNbOcc() + 1);
-		else rac.setFd(inserer(rac.getFd(), mot));
+		else rac.setFd(ajouter(rac.getFd(), mot));
 		return rac;
 	    }
 	    
 	    public void construire(String nomFichier) throws IOException {
 		Scanner lecteur = new Scanner(new File(nomFichier));
 		
-		while(lecteur.hasNext()) inserer(lecteur.next());
+		while(lecteur.hasNext()) ajouter (lecteur.next());
 	    }
 	    
 	    public int hauteur() {
@@ -86,9 +86,60 @@ package fr.isika.cda12;
 	      			 afficherNoeud(null, currentLevel+1, maxLevel);
 	      		 }
 	      	 }
-	      		
 	       }
+	      	  public Noeud successeur(Noeud currentNoeud){
+	 	    	 currentNoeud = currentNoeud.getFd();
+	 	    	 while (currentNoeud.getFg()!=null) {
+	 	    		 currentNoeud = currentNoeud.getFg();
+	 	    	 }
+	 	    	 return currentNoeud;
+	 	     }
+	      	  public Noeud predecesseur(Noeud currentNoeud){
+		 	    	 currentNoeud = currentNoeud.getFd();
+		 	    	 while (currentNoeud.getFg()!=null) {
+		 	    		 currentNoeud = currentNoeud.getFg();
+		 	    	 }
+		 	    	 return currentNoeud;
+		 	     }
+		    
 	    
-	    
-	}	  
-
+	       
+	       public void supprimer(String mot) {
+	   		racine = supprimer(racine, mot);
+	   	    }
+	   	    
+	   	    public Noeud supprimer(Noeud currentNoeud, String mot ) {
+	   		if (currentNoeud == null)  return currentNoeud;
+	    	 if (currentNoeud.getMot().compareTo(mot)==0) {
+	    		return supprimerRacine(currentNoeud);
+	    	 }
+	    	 if (currentNoeud.getMot().compareTo(mot)>0) {
+	    		 currentNoeud.setFg(supprimer(currentNoeud.getFg(), mot));
+	    	 }
+	    	 if (currentNoeud.getMot().compareTo(mot)<0) {
+	    		 currentNoeud.setFd(supprimer(currentNoeud.getFd(), mot));
+	    	 }
+	    	 return currentNoeud;
+	     }
+	   			
+	   	   public Noeud supprimerRacine(Noeud currentNoeud){
+		    	
+		    	
+		    	 if (currentNoeud.getFg() == null && currentNoeud.getFd() == null) {System.out.println("feuille\n"); return null ;}
+		    	 else if (currentNoeud.getFg() != null && currentNoeud.getFd() == null) return currentNoeud.getFg();
+		    	 else if (currentNoeud.getFg() == null && currentNoeud.getFd()!= null) return currentNoeud.getFd();
+		    	 else {
+		    	 currentNoeud.setMot( successeur(currentNoeud).getMot());
+		    	 currentNoeud.setFd(supprimer(currentNoeud.getFd(),currentNoeud.getMot()));
+		    	 return currentNoeud;
+		    	 }
+		    	
+		     }	
+	   			
+	   			
+	   			
+	   			
+	   			
+	   	 }
+	   	    
+	
