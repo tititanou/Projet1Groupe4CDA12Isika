@@ -2,12 +2,18 @@ package fr.isika.cda12;
 
 import java.io.IOException;
 
+
 public class Main {
 
 	public static void main(String[] args) {
 		try {
 			Arbre arbre = new Arbre();
 			
+			arbre.afficherArbre();
+			arbre.ajouter("Ahmed");
+			arbre.afficherArbre();
+			arbre.supprimer("Ahmed");
+			arbre.supprimer("Coralie");
 			arbre.afficherArbre();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
