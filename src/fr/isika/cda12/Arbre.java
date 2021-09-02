@@ -13,7 +13,7 @@ package fr.isika.cda12;
 	    public Arbre() {}
 	    
 	    public Arbre(String noms)  throws IOException {
-		construire("C:\\develops\\outils\\Workspace\\Projet1\\Projet1Groupe4CDA12Isika\\assets\\noms.txt");	
+		construire("assets/noms.txt");	
 	    }
 	    
 	    public void inserer(String mot) {
