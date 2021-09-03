@@ -5,13 +5,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.collections.ObservableList;
+
 public class Arbre {
 	private Noeud racine;
 
 	// public Arbre() {}
 
-	public Arbre() throws IOException {
-		construire("assets/noms.txt");
+	public Arbre(String fileName) throws IOException {
+		construire(fileName);
 	}
 
 	public void ajouter(String mot) {
@@ -65,26 +67,27 @@ public class Arbre {
 		}
 	}
 
-	public void afficherArbre() {
+	public void afficherArbre(ObservableList<String> liste) {
 		System.out.println("Affichage de l'arbre :\n\n");
-		afficherNoeud(racine, 0, hauteur());
+		afficherNoeud(racine, 0, hauteur(), liste);
 		System.out.println();
 	}
 
-	public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel) {
+	public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel, ObservableList<String> liste) {
 
 		if (currentNoeud != null) {
-			afficherNoeud(currentNoeud.getFg(), currentLevel + 1, maxLevel);
+			afficherNoeud(currentNoeud.getFg(), currentLevel + 1, maxLevel, liste);
 			for (int i = 0; i < (maxLevel - currentLevel - 1); i++) {
 				// System.out.print(" ");
 			}
+			liste.add(currentNoeud.getMot());
 			System.out.println(currentNoeud.getMot());
-			afficherNoeud(currentNoeud.getFd(), currentLevel + 1, maxLevel);
+			afficherNoeud(currentNoeud.getFd(), currentLevel + 1, maxLevel, liste);
 		} else {
 			if (currentLevel < maxLevel) {
-				afficherNoeud(null, currentLevel + 1, maxLevel);
+				afficherNoeud(null, currentLevel + 1, maxLevel, liste);
 				// System.out.println("");
-				afficherNoeud(null, currentLevel + 1, maxLevel);
+				afficherNoeud(null, currentLevel + 1, maxLevel, liste);
 			}
 		}
 	}

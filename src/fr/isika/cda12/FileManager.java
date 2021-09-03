@@ -1,12 +1,15 @@
 package fr.isika.cda12;
 
 import java.io.*;
+
 import java.util.*;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class FileManager {
+	
+	
 
 	public static void readFile(String fileName) {
 		
