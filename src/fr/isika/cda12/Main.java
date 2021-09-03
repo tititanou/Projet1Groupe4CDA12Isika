@@ -2,28 +2,33 @@ package fr.isika.cda12;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class Main {
 
 	public static void main(String[] args) {
-//		try {
-//			Arbre arbre = new Arbre();
+		try {
+			ObservableList<String> liste = FXCollections.observableArrayList();
+			Arbre arbre = new Arbre("assets/noms.txt");
+			
+			
+//			Administrateur admin = new Administrateur("Martin", "Jean");
 //			
-//			arbre.afficherArbre();
-//			arbre.ajouter("Ahmed");
-//			arbre.afficherArbre();
-//			arbre.supprimer("Ahmed");
-//			arbre.supprimer("Coralie");
-//			arbre.afficherArbre();
-//			arbre.ajouter("Tania");
-//			arbre.afficherArbre();
-//			arbre.modifier("Tania", "Cheyma");
-//			arbre.afficherArbre();
+//			admin.ajoutEt("Walter", arbre, liste);
 //			
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+//			admin.ajoutEt("Zoé", arbre, liste);
+//			
+//			admin.supprimerEt("Walter", arbre, liste);
+//			
+//			admin.modifierEt("Zoé", "Zakaria", arbre, liste);
+			
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 	}
