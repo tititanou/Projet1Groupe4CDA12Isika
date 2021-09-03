@@ -4,8 +4,6 @@ import java.io.*;
 
 import java.util.*;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class FileManager {
 	
@@ -24,9 +22,9 @@ public class FileManager {
 			myReader.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Echec de la lecture du fichier");
-			alert.setContentText("Un problème est survenu avec le fichier!");
+			//Alert alert = new Alert(AlertType.ERROR);
+			//alert.setHeaderText("Echec de la lecture du fichier");
+			//alert.setContentText("Un problème est survenu avec le fichier!");
 		}
 	}
 	
