@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2AACB2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2AACB2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.MainHomePageController">
    <children>
       <ImageView fitHeight="158.0" fitWidth="231.0" layoutX="181.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0">
          <image>
@@ -27,12 +27,12 @@
       </HBox>
       <ButtonBar layoutX="20.0" layoutY="135.0" prefHeight="74.0" prefWidth="560.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <buttons>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 1em;" text="S'inscrire" translateX="-220.0">
+            <Button fx:id="btnInscription" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 1em;" text="S'inscrire" translateX="-220.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 1em;" text="Se connecter" translateX="-30.0">
+            <Button fx:id="btnConnexion" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 1em;" text="Se connecter" translateX="-30.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
