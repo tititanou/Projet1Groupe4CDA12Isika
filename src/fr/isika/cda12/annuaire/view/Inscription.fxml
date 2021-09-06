@@ -44,7 +44,7 @@
                   </Button>
                   <ImageView fitHeight="132.0" fitWidth="170.0" layoutX="60.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Users/pagac/Desktop/Isika/Projet/logo%20Isika.png" />
+                        <Image url="@../../../../../../../../../../../Users/pagac/Desktop/Isika/Projet/logo%20Isika.png" />
                      </image>
                   </ImageView>
                </children>

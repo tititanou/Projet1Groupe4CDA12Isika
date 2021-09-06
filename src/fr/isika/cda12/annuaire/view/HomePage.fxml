@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="158.0" fitWidth="231.0" layoutX="181.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0">
          <image>
-            <Image url="@../../../../../../../../Users/pagac/Desktop/Isika/Projet/logo%20Isika.png" />
+            <Image url="@../../../../../../../../../../../Users/pagac/Desktop/Isika/Projet/logo%20Isika.png" />
          </image>
       </ImageView>
       <HBox alignment="CENTER" layoutX="14.0" layoutY="24.0" prefHeight="100.0" prefWidth="560.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">

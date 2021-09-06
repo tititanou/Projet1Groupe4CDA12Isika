@@ -1,4 +1,4 @@
-package annuaire.model;
+package fr.isika.cda12.annuaire.model;
 
 public class Stagiaire {
 	
@@ -32,6 +32,12 @@ public class Stagiaire {
 	public Stagiaire() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Stagiaire(String prenom) {
+		super();
+		this.id = 0;
+		this.prenom = prenom;
 	}
 
 

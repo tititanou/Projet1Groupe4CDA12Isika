@@ -1,4 +1,4 @@
-package annuaire;
+package fr.isika.cda12.annuaire;
 
 import java.io.IOException;
 
