@@ -1,9 +1,10 @@
 package fr.isika.cda12;
 
-public class Personne {
+public class Personne{
 
-	String nom;
-	String prenom;
+	private String nom;
+	private String prenom;
+	private String id;
 	
 	public String getNom() {
 		return nom;
@@ -17,10 +18,16 @@ public class Personne {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public Personne(String nom, String prenom) {
-		super();
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Personne(String nom, String prenom, String id) {
 		this.nom = nom;
 		this.prenom = prenom;
+		this.id = id;
 	}
 	
 	public void  CreerCompte ( String nom, String prenom,String motDePasse) {
@@ -35,6 +42,12 @@ public class Personne {
 	}
 	public void Deconnexion ( ) {
 		
+	}
+	
+	@Override
+	public String toString() {
+		
+		return this.nom + " " + this.prenom;
 	}
 
 	}	

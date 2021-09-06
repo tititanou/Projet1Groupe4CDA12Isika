@@ -1,12 +1,12 @@
 package fr.isika.cda12;
 
 public class Noeud {
-	private String mot;
+	private Personne person;
 	private Noeud fg, fd;
 	private int nbOcc = 1;
 	
-	public Noeud(String mot) {
-		this.mot = mot;
+	public Noeud(Personne person) {
+		this.person = person;
 	}
 
 	public int getNbOcc() {
@@ -17,16 +17,16 @@ public class Noeud {
 		this.nbOcc = nbOcc;
 	}
 
-	public void setMot(String mot) {
-		this.mot = mot;
+	public void setPerson(Personne person) {
+		this.person = person;
 	}
 
-	public String getMot() {
-		return mot;
+	public Personne getPerson() {
+		return person;
 	}
 
-	public void setDonnee(String mot) {
-		this.mot = mot;
+	public void setDonnee(Personne person) {
+		this.person = person;
 	}
 
 	public Noeud getFg() {

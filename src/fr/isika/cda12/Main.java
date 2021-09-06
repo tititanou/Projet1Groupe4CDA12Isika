@@ -12,7 +12,10 @@ public class Main {
 		try {
 			ObservableList<String> liste = FXCollections.observableArrayList();
 			Arbre arbre = new Arbre("assets/noms.txt");
-			
+			//arbre.afficherArbre(liste);
+			//arbre.ajouter("Justinien");
+			//arbre.afficherArbre(liste);
+			//System.out.println(arbre.rechercher_liste("in"));
 			
 //			Administrateur admin = new Administrateur("Martin", "Jean");
 //			

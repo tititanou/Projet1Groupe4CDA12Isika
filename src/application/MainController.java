@@ -3,32 +3,25 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import fr.isika.cda12.Arbre;
-import fr.isika.cda12.FileManager;
-import javafx.application.Platform;
+import fr.isika.cda12.Personne;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.scene.control.Alert.AlertType;
 public class MainController implements Initializable {
 	
 	@FXML
@@ -47,13 +40,16 @@ public class MainController implements Initializable {
 	private Button btnDelete;
 	
 	@FXML
-	private ListView<String> tvStagiaire;
-	
-//	@FXML
-//	private TableColumn<String, Integer> colId;
+	private Button btnPrint;
 	
 	@FXML
-	private TableColumn<String, String> colPrenom;
+	private TableView<Personne> tvStagiaire;
+	
+	@FXML
+	private TableColumn<Personne, String> colNom;
+	
+	@FXML
+	private TableColumn<Personne, String> colPrenom;
 	
 
 	
@@ -122,15 +118,19 @@ public class MainController implements Initializable {
 		
 		if (event.getSource() == btnInsert) {
 			
-			Ajouter();
+			ajouter();
 			
 		} else if (event.getSource() == btnUpdate) {
 			
-			Miseajour();
+			miseAJour();
+			
+		} else if (event.getSource() == btnPrint) {
+			
+			imprimer();
 			
 		} else {
 			
-			Supprimer();
+			supprimer();
 		}
 		afficherStagiaire();
 	}
@@ -155,7 +155,7 @@ public class MainController implements Initializable {
 //		}
 //	}
 	
-	private void Ajouter() {
+	private void ajouter() {
 		
 //		String query = "INSERT INTO `stagiaire`(`id`, `prenom`) VALUES (" + tfId.getText() + ",'" + tfPrenom.getText() + "')";
 //		
@@ -167,7 +167,7 @@ public class MainController implements Initializable {
 		
 	}
 	
-	private void Miseajour() {
+	private void miseAJour() {
 		
 		
 //		// Requête sql
@@ -178,7 +178,7 @@ public class MainController implements Initializable {
 		
 	}
 	
-	private void Supprimer() {
+	private void supprimer() {
 		 
 //		 String query = "DELETE FROM `stagiaire` WHERE id = " + tfId.getText();
 //		 
@@ -231,9 +231,9 @@ public class MainController implements Initializable {
 //	}
 	
 	// méthode qui met à jour automatiquement la collection
-			public ObservableList<String> getStagiaires() {
+			public ObservableList<Personne> getStagiaires() {
 				
-				ObservableList<String> stagiaireListe = FXCollections.observableArrayList();
+				ObservableList<Personne> stagiaireListe = FXCollections.observableArrayList();
 				
 				Arbre arbre;
 				try {
@@ -270,26 +270,26 @@ public class MainController implements Initializable {
 //				} catch (Exception e) {
 //					System.err.println("Error" + e);
 //				}
-				
+				System.out.println(stagiaireListe);
 				return stagiaireListe;
 			}
 			
 			public void afficherStagiaire() {
 				try {
-					List<String> list = this.getStagiaires();
+					List<Personne> list = this.getStagiaires();
 					//System.out.println(list);
-					// colId.setCellValueFactory(new PropertyValueFactory<Stagiaire, Integer>("id"));
+					colNom.setCellValueFactory(new PropertyValueFactory<Personne, String>("nom"));
 					//System.out.println(colId);
 //					for (String stagiaire : list) {
 //						System.out.println(stagiaire + " ok");
 //					}
-					//colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+					colPrenom.setCellValueFactory(new PropertyValueFactory<Personne, String>("prenom"));
 					//System.out.println(colPrenom);
 					
 					//colPrenom.getColumns().addAll(list<String>);
 					
 				
-			
+					//tvStagiaire.getColumns().add(colPrenom);
 			
 					tvStagiaire.getItems().clear();
 					tvStagiaire.getItems().addAll(list);
@@ -297,6 +297,15 @@ public class MainController implements Initializable {
 					
 				} catch (NullPointerException e) {
 					System.err.println("Error" + e);
+				}
+			}
+			
+			private void imprimer() {
+				final PrinterJob printerjob = PrinterJob.createPrinterJob();
+				if (printerjob.showPrintDialog(tvStagiaire.getScene().getWindow())) {
+					if(printerjob.printPage(tvStagiaire)) {
+						printerjob.endJob();
+					}
 				}
 			}
 

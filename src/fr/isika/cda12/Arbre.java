@@ -2,6 +2,8 @@ package fr.isika.cda12;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import javafx.collections.ObservableList;
 
@@ -14,29 +16,42 @@ public class Arbre {
 		construire(fileName);
 	}
 
-	public void ajouter(String mot) {
-		racine = ajouter(racine, mot);
+	public void ajouter(Personne person) {
+		racine = ajouter(racine, person);
 	}
 
-	public Noeud ajouter(Noeud rac, String mot) {
+	public Noeud ajouter(Noeud rac, Personne person) {
 		if (rac == null) {
-			Noeud nouveau = new Noeud(mot);
+			Noeud nouveau = new Noeud(person);
 			return nouveau;
 		}
-		if (mot.compareTo(rac.getMot()) < 0)
-			rac.setFg(ajouter(rac.getFg(), mot));
-		else if (mot.compareTo(rac.getMot()) == 0)
+		if (person.getNom().compareTo(rac.getPerson().getNom()) < 0) {
+			rac.setFg(ajouter(rac.getFg(), person));
+		}
+		else if (person.getNom().compareTo(rac.getPerson().getNom()) == 0) {
 			rac.setNbOcc(rac.getNbOcc() + 1);
-		else
-			rac.setFd(ajouter(rac.getFd(), mot));
+		}
+		else {
+			rac.setFd(ajouter(rac.getFd(), person));
+		}
 		return rac;
 	}
 
 	public void construire(String nomFichier) throws IOException {
 		Scanner lecteur = new Scanner(new File(nomFichier));
 
-		while (lecteur.hasNext())
-			ajouter(lecteur.next());
+		while (lecteur.hasNext()) {
+			String[] splits = lecteur.next().split(",");
+			String prenom = splits[0];
+			String nom = "";
+			if(splits[1] != null) {
+				nom = splits[1];
+			}
+			String id = System.currentTimeMillis() + prenom + nom;
+			Personne person = new Personne(nom, prenom, id);
+			System.out.println(person.getNom() + " " + person.getPrenom());
+			this.ajouter(person);
+		}
 	}
 
 	public int hauteur() {
@@ -60,26 +75,26 @@ public class Arbre {
 	public void ecrireListeTriee(Noeud rac) {
 		if (rac != null) {
 			ecrireListeTriee(rac.getFg());
-			System.out.println(rac.getMot() + " (" + rac.getNbOcc() + " fois)");
+			System.out.println(rac.getPerson() + " (" + rac.getNbOcc() + " fois)");
 			ecrireListeTriee(rac.getFd());
 		}
 	}
 
-	public void afficherArbre(ObservableList<String> liste) {
+	public void afficherArbre(ObservableList<Personne> liste) {
 		System.out.println("Affichage de l'arbre :\n\n");
 		afficherNoeud(racine, 0, hauteur(), liste);
 		System.out.println();
 	}
 
-	public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel, ObservableList<String> liste) {
+	public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel, ObservableList<Personne> liste) {
 
 		if (currentNoeud != null) {
 			afficherNoeud(currentNoeud.getFg(), currentLevel + 1, maxLevel, liste);
 			for (int i = 0; i < (maxLevel - currentLevel - 1); i++) {
 				// System.out.print(" ");
 			}
-			liste.add(currentNoeud.getMot());
-			System.out.println(currentNoeud.getMot());
+			liste.add(currentNoeud.getPerson());
+			System.out.println(currentNoeud.getPerson());
 			afficherNoeud(currentNoeud.getFd(), currentLevel + 1, maxLevel, liste);
 		} else {
 			if (currentLevel < maxLevel) {
@@ -106,21 +121,21 @@ public class Arbre {
 		return currentNoeud;
 	}
 
-	public void supprimer(String mot) {
-		racine = supprimer(racine, mot);
+	public void supprimer(Personne person) {
+		racine = supprimer(racine, person);
 	}
 
-	public Noeud supprimer(Noeud currentNoeud, String mot) {
+	public Noeud supprimer(Noeud currentNoeud, Personne person) {
 		if (currentNoeud == null)
 			return currentNoeud;
-		if (currentNoeud.getMot().compareTo(mot) == 0) {
+		if (currentNoeud.getPerson().getId().compareTo(person.getId()) == 0) {
 			return supprimerRacine(currentNoeud);
 		}
-		if (currentNoeud.getMot().compareTo(mot) > 0) {
-			currentNoeud.setFg(supprimer(currentNoeud.getFg(), mot));
+		if (currentNoeud.getPerson().getId().compareTo(person.getId()) > 0) {
+			currentNoeud.setFg(supprimer(currentNoeud.getFg(), person));
 		}
-		if (currentNoeud.getMot().compareTo(mot) < 0) {
-			currentNoeud.setFd(supprimer(currentNoeud.getFd(), mot));
+		if (currentNoeud.getPerson().getId().compareTo(person.getId()) < 0) {
+			currentNoeud.setFd(supprimer(currentNoeud.getFd(), person));
 		}
 		return currentNoeud;
 	}
@@ -135,16 +150,54 @@ public class Arbre {
 		else if (currentNoeud.getFg() == null && currentNoeud.getFd() != null)
 			return currentNoeud.getFd();
 		else {
-			currentNoeud.setMot(successeur(currentNoeud).getMot());
-			currentNoeud.setFd(supprimer(currentNoeud.getFd(), currentNoeud.getMot()));
+			currentNoeud.setPerson(successeur(currentNoeud).getPerson());
+			currentNoeud.setFd(supprimer(currentNoeud.getFd(), currentNoeud.getPerson()));
 			return currentNoeud;
 		}
 
 	}
-	
-	public void modifier(String exValeur, String newValeur) {
-		this.supprimer(exValeur);
-		this.ajouter(newValeur);
+
+	public void modifier(Personne exPerson, Personne newPerson) {
+		this.supprimer(exPerson);
+		this.ajouter(newPerson);
+	}
+
+	public List<Personne> rechercher_liste(String selec, String valeur) {
+		List<Personne> listeRetour = new ArrayList<Personne>();
+		return rechercher_liste_annexe(listeRetour, racine, selec, valeur);
+	}
+
+	public List<Personne> rechercher_liste_annexe(List<Personne> listRetour, Noeud currentNoeud, String selec,
+			String valeur) {
+
+		if (selec.equals("nom")) {
+			if (currentNoeud == null)
+				return listRetour;
+			else if (currentNoeud.getPerson().getNom().compareTo(valeur) == 0) {
+				listRetour.add(currentNoeud.getPerson());
+				rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
+				return listRetour;
+			} else if (currentNoeud.getPerson().getNom().compareTo(valeur) > 0) {
+				return rechercher_liste_annexe(listRetour, currentNoeud.getFg(), selec, valeur);
+			} else {
+				return rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
+			}
+		}
+		else if (selec.equals("prenom")) {
+			if (currentNoeud == null)
+				return listRetour;
+			else if (currentNoeud.getPerson().getPrenom().compareTo(valeur) == 0) {
+				listRetour.add(currentNoeud.getPerson());
+				rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
+				return listRetour;
+			} else if (currentNoeud.getPerson().getPrenom().compareTo(valeur) > 0) {
+				return rechercher_liste_annexe(listRetour, currentNoeud.getFg(), selec, valeur);
+			} else {
+				return rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
+			}
+		}
+		else return null;
+
 	}
 
 }

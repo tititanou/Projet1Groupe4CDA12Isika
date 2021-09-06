@@ -3,12 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <HBox alignment="TOP_CENTER" layoutX="17.0" layoutY="69.0" prefHeight="46.0" prefWidth="566.0" spacing="20.0">
          <children>
@@ -46,11 +47,12 @@
                </HBox.margin></TextField>
          </children>
       </HBox>
-      <ListView fx:id="tvStagiaire" layoutX="165.0" layoutY="179.0" prefHeight="200.0" prefWidth="279.0" />
-      <Label alignment="CENTER" layoutX="165.0" layoutY="154.0" prefHeight="26.0" prefWidth="279.0" style="-fx-background-color: grey;" text="Prénom">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
+      <TableView fx:id="tvStagiaire" layoutX="200.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="colNom" prefWidth="103.0" text="Nom" />
+          <TableColumn fx:id="colPrenom" prefWidth="96.0" text="Prénom" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnPrint" alignment="CENTER" layoutX="260.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="80.0" text="Imprimer" />
    </children>
 </AnchorPane>
