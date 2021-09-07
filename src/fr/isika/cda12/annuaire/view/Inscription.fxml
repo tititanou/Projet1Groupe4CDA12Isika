@@ -15,24 +15,24 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="300.0">
                <children>
-                  <Label layoutX="30.0" layoutY="220.0" prefHeight="30.0" prefWidth="242.0" text="Confirmer votre mot de passe" />
-                  <TextField layoutX="30.0" layoutY="90.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <TextField layoutX="30.0" layoutY="170.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <TextField layoutX="30.0" layoutY="250.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <Label layoutX="30.0" layoutY="140.0" prefHeight="30.0" prefWidth="242.0" text="Choisir votre mot de passe" />
-                  <Label layoutX="30.0" layoutY="60.0" prefHeight="30.0" prefWidth="242.0" text="Identifiant" />
+                  <Label layoutX="30.0" layoutY="220.0" prefHeight="30.0" prefWidth="242.0" text="Choisir votre mot de passe" />
+                  <TextField fx:id="tfPrenom" layoutX="30.0" layoutY="90.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <TextField fx:id="tfNom" layoutX="30.0" layoutY="170.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <TextField fx:id="tfMotDePasse" layoutX="30.0" layoutY="250.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <Label layoutX="30.0" layoutY="140.0" prefHeight="30.0" prefWidth="242.0" text="Nom" />
+                  <Label layoutX="30.0" layoutY="60.0" prefHeight="30.0" prefWidth="242.0" text="Prénom" />
                   <Label alignment="CENTER" layoutX="30.0" layoutY="25.0" prefHeight="30.0" prefWidth="242.0" text="Inscription" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="System Bold Italic" size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="30.0" layoutY="300.0" prefHeight="30.0" prefWidth="242.0" text="Adresse email" />
-                  <TextField layoutX="30.0" layoutY="330.0" prefHeight="30.0" prefWidth="244.0" />
+                  <Label layoutX="30.0" layoutY="300.0" prefHeight="30.0" prefWidth="242.0" text="Confirmer votre mot de passe" />
+                  <TextField fx:id="tfMotDePasse2" layoutX="30.0" layoutY="330.0" prefHeight="30.0" prefWidth="244.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button alignment="CENTER" layoutX="85.0" layoutY="164.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="120.0" style="-fx-background-radius: 1em;" text="Valider">
+                  <Button fx:id="btnValidate" alignment="CENTER" layoutX="85.0" layoutY="164.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="120.0" style="-fx-background-radius: 1em;" text="Valider">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>

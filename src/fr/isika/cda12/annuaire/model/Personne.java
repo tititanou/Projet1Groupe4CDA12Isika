@@ -4,7 +4,7 @@ public class Personne {
 	
 	private String nom;
 	private String prenom;
-	private String id;
+	//private String id;
 	
 	public String getNom() {
 		return nom;
@@ -18,29 +18,54 @@ public class Personne {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public Personne(String nom, String prenom, String id) {
+//	public String getId() {
+//		return id;
+//	}
+//	public void setId(String id) {
+//		this.id = id;
+//	}
+	public Personne(String nom, String prenom) {
 		this.nom = nom;
-		this.prenom = prenom;
-		this.id = id;
+		this.prenom = prenom;	
 	}
 	
-	public void  CreerCompte ( String nom, String prenom,String motDePasse) {
-		System.out.println("Nom: " +nom);
-		System.out.println("Prenom: " +prenom);
-		System.out.println("Mot de passe : " +motDePasse);
-		System.out.println("Confirmation du mot de passe : " +motDePasse);
+	public Personne() {
+		
 	}
-	public void Connexion (String NomUtilisateur, String motDePasse ) {
+	
+	public boolean creerCompte ( String lastName, String firstName,String pwd1, String pwd2) {
+		
+		boolean result;
+		
+		if (pwd1.length() != pwd2.length()) {
+			System.out.println("Les mots de passe sont différents");
+			result = false;
+	
+		} else {
+		    
+		    if (pwd1.equals(pwd2)) {
+		    	System.out.println("le compte est créé");
+		    	result = true;
+		    } else {
+		    	System.out.println("Les mots de passe sont différents");
+		    	result = false;
+		    }
+		    
+		}
+		
+		System.out.println("Nom: " +lastName);
+		System.out.println("Prenom: " +firstName);
+		System.out.println("Mot de passe : " +pwd1);
+		
+		return result;
+	}
+	
+	public void connexion (String NomUtilisateur, String motDePasse ) {
 		System.out.println("Nom de l'utilisateur:  " +NomUtilisateur);
 		System.out.println( "Mot de passe:  "+motDePasse);
 	}
-	public void Deconnexion ( ) {
+	
+	public void deconnexion ( ) {
 		
 	}
 	
