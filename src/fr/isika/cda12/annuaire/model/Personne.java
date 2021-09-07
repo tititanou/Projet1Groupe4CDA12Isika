@@ -14,6 +14,13 @@ public class Personne {
 		this.mdp = mdp;
 	}
 	
+	public Personne(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.id = nom + "_" + prenom;
+		this.mdp = null;
+	}
+	
 	public String getNom() {
 		return nom;
 	}
