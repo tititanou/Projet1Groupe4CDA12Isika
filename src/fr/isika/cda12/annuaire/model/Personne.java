@@ -33,9 +33,10 @@ public class Personne {
 		
 	}
 	
-	public boolean creerCompte ( String lastName, String firstName,String pwd1, String pwd2) {
+	public boolean creerCompte ( String lastName, String firstName, String pwd1, String pwd2) {
 		
 		boolean result;
+		Personne person = new Personne (lastName, firstName);
 		
 		if (pwd1.length() != pwd2.length()) {
 			System.out.println("Les mots de passe sont différents");

@@ -13,8 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class MainInscriptionController implements Initializable {
@@ -24,6 +26,9 @@ public class MainInscriptionController implements Initializable {
 	
 	@FXML
 	private TextField tfNom;
+	
+	@FXML
+	private TextField tfIdent;
 	
 	@FXML
 	private TextField tfMotDePasse;
@@ -51,13 +56,28 @@ public class MainInscriptionController implements Initializable {
 			inscr_stage.show();
 			
 			}  else  if (event.getSource() == btnValidate) {
-			System.out.println(tfNom.getText() + tfPrenom.getText());
+			//System.out.println(tfNom.getText() + tfPrenom.getText());
 			
 			Personne person = new Personne (tfNom.getText(), tfPrenom.getText());
 			boolean resultat = person.creerCompte(tfNom.getText(), tfPrenom.getText(), tfMotDePasse.getText(), tfMotDePasse2.getText());
 			
 			if (resultat == true) {
 				
+				String ident = person.getNom() + "_" + person.getPrenom();
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Identifiant");
+				alert.setContentText("Votre identifiant est : " + ident);
+				alert.showAndWait();
+				
+				try {
+					Thread.sleep(1000);
+					alert.close();
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
 	
 			Parent mainStagiaire_parent = FXMLLoader.load(getClass().getResource("MainStagiaire.fxml"));
 			Scene mainStagiaire_scene = new Scene (mainStagiaire_parent);
