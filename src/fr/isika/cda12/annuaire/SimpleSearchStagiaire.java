@@ -44,7 +44,7 @@ public class SimpleSearchStagiaire extends Application {
         try {
             
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SimpleSearchStagiaire.class.getResource("view/StagiaireOverview.fxml"));
+            loader.setLocation(SimpleSearchStagiaire.class.getResource("view/SimpleSearchStagiaire.fxml"));
             AnchorPane stagiaireOverview = (AnchorPane) loader.load();
             
             rootLayout.setCenter(stagiaireOverview);

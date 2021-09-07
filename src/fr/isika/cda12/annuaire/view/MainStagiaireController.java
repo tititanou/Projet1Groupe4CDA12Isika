@@ -1,5 +1,8 @@
 package fr.isika.cda12.annuaire.view;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.net.URL;
@@ -51,6 +54,8 @@ public class MainStagiaireController implements Initializable {
 
 	@FXML
 	private TableColumn<Personne, String> colPrenom;
+	
+	File fileStudents;
 
 	// Reference to the main application.
 	// private MainStagiaireOverview mainStagiaire;
@@ -63,6 +68,7 @@ public class MainStagiaireController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		afficherStagiaire();
+		fileStudents = prePrint(getStagiaires());
 	}
 
 	@FXML
@@ -92,7 +98,7 @@ public class MainStagiaireController implements Initializable {
 			ms_stage.setScene(hp_scene);
 			ms_stage.show();
 		} else if (event.getSource() == btnPrint){
-			imprimer();
+			imprimer(fileStudents);
 		} else {
 			System.out.println("veuillez réessayer");
 		}
@@ -104,12 +110,12 @@ public class MainStagiaireController implements Initializable {
 		
 	}
 
-	private void imprimer() {
-		final PrinterJob printerjob = PrinterJob.createPrinterJob();
-		if (printerjob.showPrintDialog(tvStagiaire.getScene().getWindow())) {
-			if(printerjob.printPage(tvStagiaire)) {
-				printerjob.endJob();
-			}
+	private void imprimer(File file) {
+		try {
+			java.awt.Desktop.getDesktop().print(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -146,6 +152,28 @@ public class MainStagiaireController implements Initializable {
 		} catch (NullPointerException e) {
 			System.err.println("Error" + e);
 		}
+	}
+	
+	private File prePrint(List<Personne> list) {
+
+		String fileName = "Liste d'étudiants " + System.currentTimeMillis();
+		File file = new File(fileName);
+		try {
+			file.createNewFile();
+
+			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (Personne person : list) {
+				bw.write("Nom: " + person.getNom() + "\nPrénom: " + person.getPrenom()
+						+ "\n-------------------------------------------------\n");
+			}
+			bw.close();
+			return file;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }
