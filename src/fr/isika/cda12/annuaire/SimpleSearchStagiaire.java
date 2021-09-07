@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MainStagiaireOverview extends Application {
+public class SimpleSearchStagiaire extends Application {
 	
 	private Stage primaryStage;
     private BorderPane rootLayout;
@@ -28,7 +28,7 @@ public class MainStagiaireOverview extends Application {
         try {
             
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainStagiaireOverview.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(SimpleSearchStagiaire.class.getResource("view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
             
             Scene scene = new Scene(rootLayout);
@@ -44,7 +44,7 @@ public class MainStagiaireOverview extends Application {
         try {
             
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainStagiaireOverview.class.getResource("view/StagiaireOverview.fxml"));
+            loader.setLocation(SimpleSearchStagiaire.class.getResource("view/StagiaireOverview.fxml"));
             AnchorPane stagiaireOverview = (AnchorPane) loader.load();
             
             rootLayout.setCenter(stagiaireOverview);

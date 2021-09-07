@@ -238,7 +238,7 @@ public class MainController implements Initializable {
 				
 				Arbre arbre;
 				try {
-					arbre = new Arbre("assets/noms.txt");
+					arbre = new Arbre("assets/noms.txt", "Nom");
 					arbre.afficherArbre(stagiaireListe);
 				} catch (IOException e) {
 					Alert alert = new Alert(AlertType.ERROR);

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -10,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.MainStagiaireOverviewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.SimpleSearchStagiaireController">
    <children>
       <SplitPane dividerPositions="0.5551470588235293" layoutX="165.0" layoutY="78.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -32,7 +34,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="tvStagiaire" layoutX="78.0" layoutY="39.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tvStagiaire" layoutX="78.0" layoutY="39.0" prefHeight="348.0" prefWidth="262.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="colNom" text="Nom" />
                         <TableColumn fx:id="colPrenom" text="Prénom" />
@@ -41,6 +43,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <ButtonBar layoutY="348.0" prefHeight="52.0" prefWidth="262.0">
+                    <buttons>
+                        <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="75.0" text="Imprimer" />
+                    </buttons>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </ButtonBar>
                </children>
             </AnchorPane>
          </items>

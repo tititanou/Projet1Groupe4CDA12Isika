@@ -12,32 +12,57 @@ public class Arbre {
 
 	// public Arbre() {}
 
-	public Arbre(String fileName) throws IOException {
-		construire(fileName);
+	public Arbre(String fileName, String critere) throws IOException {
+		construire(fileName, critere);
 	}
 
-	public void ajouter(Personne person) {
-		racine = ajouter(racine, person);
+	public void ajouter(Personne person, String critere) {
+		if(critere.equals("Nom")) {
+			racine = ajouterParNom(racine, person);
+		}
+		else if(critere.equals("Prénom")) {
+			racine = ajouterParPrenom(racine, person);
+		}
+		
 	}
 
-	public Noeud ajouter(Noeud rac, Personne person) {
+	public Noeud ajouterParNom(Noeud rac, Personne person) {
 		if (rac == null) {
 			Noeud nouveau = new Noeud(person);
 			return nouveau;
 		}
 		if (person.getNom().compareTo(rac.getPerson().getNom()) < 0) {
-			rac.setFg(ajouter(rac.getFg(), person));
+			rac.setFg(ajouterParNom(rac.getFg(), person));
 		}
 		else if (person.getNom().compareTo(rac.getPerson().getNom()) == 0) {
 			rac.setNbOcc(rac.getNbOcc() + 1);
 		}
 		else {
-			rac.setFd(ajouter(rac.getFd(), person));
+			rac.setFd(ajouterParNom(rac.getFd(), person));
 		}
 		return rac;
 	}
 
-	public void construire(String nomFichier) throws IOException {
+	public Noeud ajouterParPrenom(Noeud rac, Personne person) {
+		if (rac == null) {
+			Noeud nouveau = new Noeud(person);
+			return nouveau;
+		}
+		if (person.getPrenom().compareTo(rac.getPerson().getPrenom()) < 0) {
+			rac.setFg(ajouterParPrenom(rac.getFg(), person));
+		}
+		else if (person.getPrenom().compareTo(rac.getPerson().getPrenom()) == 0) {
+			rac.setNbOcc(rac.getNbOcc() + 1);
+		}
+		else {
+			rac.setFd(ajouterParPrenom(rac.getFd(), person));
+		}
+		return rac;
+	}
+	
+	
+
+	public void construire(String nomFichier, String critere) throws IOException {
 		Scanner lecteur = new Scanner(new File(nomFichier));
 
 		while (lecteur.hasNext()) {
@@ -50,7 +75,7 @@ public class Arbre {
 			String id = System.currentTimeMillis() + prenom + nom;
 			Personne person = new Personne(nom, prenom, id);
 			System.out.println(person.getNom() + " " + person.getPrenom());
-			this.ajouter(person);
+			this.ajouter(person, critere);
 		}
 	}
 
@@ -159,7 +184,7 @@ public class Arbre {
 
 	public void modifier(Personne exPerson, Personne newPerson) {
 		this.supprimer(exPerson);
-		this.ajouter(newPerson);
+		this.ajouter(newPerson, "Nom");
 	}
 
 	public List<Personne> rechercher_liste(String selec, String valeur) {

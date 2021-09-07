@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -24,7 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class MainStagiaireOverviewController implements Initializable {
+public class SimpleSearchStagiaireController implements Initializable {
 	
 	@FXML
     ComboBox<String> comBoxCriteres;
@@ -34,6 +35,9 @@ public class MainStagiaireOverviewController implements Initializable {
     
     @FXML
     Button btnSearch;
+    
+    @FXML
+    Button btnPrint;
     
     @FXML
     TableView<Personne> tvStagiaire;
@@ -48,7 +52,7 @@ public class MainStagiaireOverviewController implements Initializable {
     // private MainStagiaireOverview mainStagiaire;
 	
 	// Constructeur
-	public MainStagiaireOverviewController() {
+	public SimpleSearchStagiaireController() {
     }
 	
 	@Override
@@ -72,6 +76,10 @@ public class MainStagiaireOverviewController implements Initializable {
 			
 			afficherStagiaire(rechercher());
 		}
+		else if (event.getSource() == btnPrint) {
+			
+			imprimer();
+		}
 	}
 	
 	private List<Personne> rechercher() {
@@ -80,7 +88,7 @@ public class MainStagiaireOverviewController implements Initializable {
 		String valeur = tfSearchSt.getText();
 		Arbre arbre;
 		try {
-			arbre = new Arbre("assets/noms.txt");   
+			arbre = new Arbre("assets/noms.txt", critere);   
 			return arbre.rechercher_liste(critere, valeur);
 		} catch (IOException e) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -91,30 +99,9 @@ public class MainStagiaireOverviewController implements Initializable {
 		}
 	}
 	
-	
-	public ObservableList<Personne> getStagiaires() {
-		
-		ObservableList<Personne> stagiaireListe = FXCollections.observableArrayList();
-		
-		Arbre arbre;
-		try {
-			arbre = new Arbre("assets/noms.txt");
-			arbre.afficherArbre(stagiaireListe);
-		} catch (IOException e) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Echec de la lecture du fichier");
-			alert.setContentText("Un problème est survenu avec le fichier!");
-			e.printStackTrace();
-		}
-		
-		return stagiaireListe;
-	}
-	
 	public void afficherStagiaire(List<Personne> list) {
 		try {
-			 
 			
-			//colPrenom.setCellValueFactory(list);
 			colPrenom.setCellValueFactory(new PropertyValueFactory<Personne, String>("prenom"));
 			
 			colNom.setCellValueFactory(new PropertyValueFactory<Personne, String>("nom"));
@@ -125,6 +112,15 @@ public class MainStagiaireOverviewController implements Initializable {
 			
 		} catch (NullPointerException e) {
 			System.err.println("Error" + e);
+		}
+	}
+	
+	private void imprimer() {
+		final PrinterJob printerjob = PrinterJob.createPrinterJob();
+		if (printerjob.showPrintDialog(tvStagiaire.getScene().getWindow())) {
+			if(printerjob.printPage(tvStagiaire)) {
+				printerjob.endJob();
+			}
 		}
 	}
 

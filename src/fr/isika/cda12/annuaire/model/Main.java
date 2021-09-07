@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			ObservableList<String> liste = FXCollections.observableArrayList();
-			Arbre arbre = new Arbre("assets/noms.txt");
+			Arbre arbre = new Arbre("assets/noms.txt", "Nom");
 			//arbre.afficherArbre(liste);
 			//arbre.ajouter("Justinien");
 			//arbre.afficherArbre(liste);
