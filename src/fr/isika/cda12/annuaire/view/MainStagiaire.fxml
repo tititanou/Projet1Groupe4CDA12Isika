@@ -7,17 +7,19 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.MainStagiaireController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.MainStagiaireController">
    <children>
       <Label prefHeight="38.0" prefWidth="201.0" text="Annuaire des stagiaires" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Calibri Bold Italic" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tvStagiaire" layoutX="33.0" layoutY="74.0" prefHeight="247.0" prefWidth="534.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="74.0">
+      <TableView fx:id="tvStagiaire" layoutX="14.0" layoutY="64.0" prefHeight="272.0" prefWidth="279.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="307.0" AnchorPane.topAnchor="64.0">
          <columns>
             <TableColumn fx:id="colNom" text="Nom" />
             <TableColumn fx:id="colPrenom" text="Prénom" />
@@ -37,5 +39,32 @@
          </padding>
       </ButtonBar>
       <Button fx:id="btnDeco" layoutX="496.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Déconnexion" />
+      <GridPane layoutX="321.0" layoutY="130.0" prefWidth="248.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Prénom" GridPane.rowIndex="1" />
+            <Label fx:id="nomLabel" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="prenomLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Téléphone" GridPane.rowIndex="2" />
+            <Label fx:id="telLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Email" GridPane.rowIndex="3" />
+            <Label fx:id="emailLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Nom" />
+         </children>
+      </GridPane>
+      <Label layoutX="340.0" layoutY="70.0" text="Informations sur la personne">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

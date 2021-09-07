@@ -1,6 +1,7 @@
 package fr.isika.cda12.annuaire.view;
 
 import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,8 +10,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import fr.isika.cda12.Arbre;
-import fr.isika.cda12.Personne;
+import fr.isika.cda12.annuaire.model.Arbre;
+import fr.isika.cda12.annuaire.model.Personne;
 import fr.isika.cda12.annuaire.model.Stagiaire;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,15 +46,30 @@ public class MainStagiaireController implements Initializable {
 
 	@FXML
 	private Button btnDeco;
+	
+	
+	@FXML
+	private Label prenomLabel;
+	
+	@FXML
+	private Label nomLabel;
+	
+	@FXML
+	private Label telLabel;
+	
+	@FXML
+	private Label emailLabel;
+	
+	
 
 	@FXML
-	private TableView<Personne> tvStagiaire;
+	private TableView<Stagiaire> tvStagiaire;
 
 	@FXML
-	private TableColumn<Personne, String> colNom;
+	private TableColumn<Stagiaire, String> colNom;
 
 	@FXML
-	private TableColumn<Personne, String> colPrenom;
+	private TableColumn<Stagiaire, String> colPrenom;
 	
 	File fileStudents;
 
@@ -69,6 +85,9 @@ public class MainStagiaireController implements Initializable {
 
 		afficherStagiaire();
 		fileStudents = prePrint(getStagiaires());
+		
+		showStagiaireDetails(null);
+		tvStagiaire.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showStagiaireDetails(newValue));
 	}
 
 	@FXML
@@ -114,14 +133,14 @@ public class MainStagiaireController implements Initializable {
 		try {
 			java.awt.Desktop.getDesktop().print(file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
 
-	public ObservableList<Personne> getStagiaires() {
+	public ObservableList<Stagiaire> getStagiaires() {
 
-		ObservableList<Personne> stagiaireListe = FXCollections.observableArrayList();
+		ObservableList<Stagiaire> stagiaireListe = FXCollections.observableArrayList();
 
 		Arbre arbre;
 		try {
@@ -139,12 +158,12 @@ public class MainStagiaireController implements Initializable {
 
 	public void afficherStagiaire() {
 		try {
-			List<Personne> list = this.getStagiaires();
+			List<Stagiaire> list = this.getStagiaires();
 
 			// colPrenom.setCellValueFactory(list);
-			colPrenom.setCellValueFactory(new PropertyValueFactory<Personne, String>("prenom"));
+			colPrenom.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("prenom"));
 
-			colNom.setCellValueFactory(new PropertyValueFactory<Personne, String>("nom"));
+			colNom.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("nom"));
 
 			tvStagiaire.getItems().clear();
 			tvStagiaire.getItems().addAll(list);
@@ -154,7 +173,7 @@ public class MainStagiaireController implements Initializable {
 		}
 	}
 	
-	private File prePrint(List<Personne> list) {
+	private File prePrint(List<Stagiaire> list) {
 
 		String fileName = "Liste d'étudiants " + System.currentTimeMillis();
 		File file = new File(fileName);
@@ -163,8 +182,8 @@ public class MainStagiaireController implements Initializable {
 
 			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			for (Personne person : list) {
-				bw.write("Nom: " + person.getNom() + "\nPrénom: " + person.getPrenom()
+			for (Stagiaire trainee : list) {
+				bw.write("Nom: " + trainee.getNom() + "\nPrénom: " + trainee.getPrenom()
 						+ "\n-------------------------------------------------\n");
 			}
 			bw.close();
@@ -175,5 +194,21 @@ public class MainStagiaireController implements Initializable {
 		}
 
 	}
+	
+	private void showStagiaireDetails(Stagiaire trainee) {
+        if (trainee != null) {
+            prenomLabel.setText(trainee.getPrenom());
+            nomLabel.setText(trainee.getNom());
+            telLabel.setText(trainee.getTel());
+            emailLabel.setText(trainee.getEmail());
+            
+        } else {
+            prenomLabel.setText("");
+            nomLabel.setText("");
+            telLabel.setText("");
+            emailLabel.setText("");
+            
+        }
+    }
 
 }
