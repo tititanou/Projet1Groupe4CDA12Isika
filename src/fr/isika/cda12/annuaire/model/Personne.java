@@ -44,7 +44,6 @@ public class Personne {
 		    if (pwd1.equals(pwd2)) {
 		    	System.out.println("le compte est créé");
 		    	result = true;
-		    	Personne person = new Personne (lastName, firstName, pwd1);
 		    } else {
 		    	System.out.println("Les mots de passe sont différents");
 		    	result = false;
