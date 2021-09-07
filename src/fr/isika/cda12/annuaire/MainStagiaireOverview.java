@@ -1,10 +1,8 @@
 package fr.isika.cda12.annuaire;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -14,8 +12,8 @@ public class MainStagiaireOverview extends Application {
 	
 	private Stage primaryStage;
     private BorderPane rootLayout;
-
-	@Override
+    
+    @Override
 	public void start(Stage primaryStage) {
 		
 		this.primaryStage = primaryStage;
@@ -62,4 +60,6 @@ public class MainStagiaireOverview extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	
 }

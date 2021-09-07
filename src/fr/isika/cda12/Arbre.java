@@ -164,35 +164,45 @@ public class Arbre {
 
 	public List<Personne> rechercher_liste(String selec, String valeur) {
 		List<Personne> listeRetour = new ArrayList<Personne>();
+		System.out.println(selec + " " + valeur);
 		return rechercher_liste_annexe(listeRetour, racine, selec, valeur);
 	}
 
 	public List<Personne> rechercher_liste_annexe(List<Personne> listRetour, Noeud currentNoeud, String selec,
 			String valeur) {
-
-		if (selec.equals("nom")) {
-			if (currentNoeud == null)
+		System.out.println("coucou!");
+		if (selec.equals("Nom")) {
+			if (currentNoeud == null) {
+				System.out.println("null last name " + listRetour);
 				return listRetour;
+			}
 			else if (currentNoeud.getPerson().getNom().compareTo(valeur) == 0) {
 				listRetour.add(currentNoeud.getPerson());
 				rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
+				System.out.println("0  last name " + listRetour);
 				return listRetour;
 			} else if (currentNoeud.getPerson().getNom().compareTo(valeur) > 0) {
+				
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFg(), selec, valeur);
 			} else {
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
 			}
 		}
-		else if (selec.equals("prenom")) {
-			if (currentNoeud == null)
+		else if (selec.equals("Prénom")) {
+			if (currentNoeud == null) {
+				System.out.println("null first name " + listRetour);
 				return listRetour;
+			}
 			else if (currentNoeud.getPerson().getPrenom().compareTo(valeur) == 0) {
 				listRetour.add(currentNoeud.getPerson());
 				rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
+				System.out.println("0 first name " + listRetour);
 				return listRetour;
 			} else if (currentNoeud.getPerson().getPrenom().compareTo(valeur) > 0) {
+				System.out.println(">0");
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFg(), selec, valeur);
 			} else {
+				System.out.println("<0");
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
 			}
 		}

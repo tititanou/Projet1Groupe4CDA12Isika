@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,43 +24,45 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class MainStagiaireController implements Initializable {
+public class MainStagiaireOverviewController implements Initializable {
 	
 	@FXML
-	private TextField tfNom;
-	
-	@FXML
-	private TextField tfPrenom;
-	
-	@FXML
-    private Label nomLabel;
-	
+    ComboBox<String> comBoxCriteres;
+    
     @FXML
-    private Label prenomLabel;
-	
-	@FXML
-	private Button btnSearch;
-	
-	@FXML
-	private TableView<Personne> tvStagiaire;
-	
-	@FXML
-	private TableColumn<Personne, String> colNom;
-	
-	@FXML
-	private TableColumn<Personne, String> colPrenom;
-	
+    TextField tfSearchSt;
+    
+    @FXML
+    Button btnSearch;
+    
+    @FXML
+    TableView<Personne> tvStagiaire;
+    
+    @FXML
+    TableColumn<Personne, String> colPrenom;
+
+    @FXML
+    TableColumn<Personne, String> colNom;
+
 	// Reference to the main application.
     // private MainStagiaireOverview mainStagiaire;
 	
 	// Constructeur
-	public MainStagiaireController() {
+	public MainStagiaireOverviewController() {
     }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		afficherStagiaire();
+		comBoxCriteres.getSelectionModel().select("Critère de recherche");
+
+		
+		ObservableList<String> choix = FXCollections.observableArrayList();
+		
+		choix.addAll("Nom", "Prénom");
+		
+		comBoxCriteres.setItems(choix);
+		
 	}
 	
 	@FXML
@@ -67,14 +70,25 @@ public class MainStagiaireController implements Initializable {
 		
 		if (event.getSource() == btnSearch) {
 			
-			Rechercher();
+			afficherStagiaire(rechercher());
 		}
-			
-		afficherStagiaire();
 	}
 	
-	private void Rechercher() {
+	private List<Personne> rechercher() {
 		
+		String critere = comBoxCriteres.getValue();
+		String valeur = tfSearchSt.getText();
+		Arbre arbre;
+		try {
+			arbre = new Arbre("assets/noms.txt");   
+			return arbre.rechercher_liste(critere, valeur);
+		} catch (IOException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Echec de la lecture du fichier");
+			alert.setContentText("Un problème est survenu avec le fichier!");
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	
@@ -96,9 +110,9 @@ public class MainStagiaireController implements Initializable {
 		return stagiaireListe;
 	}
 	
-	public void afficherStagiaire() {
+	public void afficherStagiaire(List<Personne> list) {
 		try {
-			List<Personne> list = this.getStagiaires();
+			 
 			
 			//colPrenom.setCellValueFactory(list);
 			colPrenom.setCellValueFactory(new PropertyValueFactory<Personne, String>("prenom"));
