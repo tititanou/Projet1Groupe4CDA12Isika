@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import fr.isika.cda12.annuaire.model.Personne;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class MainHomePageController implements Initializable {
+	Personne user;
 	
 	@FXML
 	private Button btnConnexion;
@@ -45,6 +47,10 @@ public class MainHomePageController implements Initializable {
 		} else {
 			System.out.println("veuillez réessayer");
 		}
+		
+	}
+	public void transferUser(Personne user) {
+		this.user = user;
 		
 	}
 
