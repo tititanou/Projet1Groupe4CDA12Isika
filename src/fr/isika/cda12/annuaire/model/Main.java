@@ -2,7 +2,7 @@ package fr.isika.cda12.annuaire.model;
 
 import java.io.IOException;
 
-import fr.isika.cda12.Arbre;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,16 +10,20 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			ObservableList<String> liste = FXCollections.observableArrayList();
+			ObservableList<Stagiaire> liste = FXCollections.observableArrayList();
 			Arbre arbre = new Arbre("assets/noms.txt", "Nom");
+			
 			//arbre.afficherArbre(liste);
 			//arbre.ajouter("Justinien");
 			//arbre.afficherArbre(liste);
 			//System.out.println(arbre.rechercher_liste("in"));
 			
-//			Administrateur admin = new Administrateur("Martin", "Jean");
-//			
-//			admin.ajoutEt("Walter", arbre, liste);
+			Administrateur admin = new Administrateur("Martin", "Jean", "yo");
+			
+			Stagiaire trainee1 = new Stagiaire ("Zorro", "Zack");
+			
+			admin.ajouterStagiaire(trainee1, arbre, liste);
+			
 //			
 //			admin.ajoutEt("Zoé", arbre, liste);
 //			

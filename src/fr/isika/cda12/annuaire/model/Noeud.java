@@ -4,12 +4,12 @@ package fr.isika.cda12.annuaire.model;
 
 public class Noeud {
 	
-	private Personne person;
+	private Stagiaire trainee;
 	private Noeud fg, fd;
 	private int nbOcc = 1;
 	
-	public Noeud(Personne person) {
-		this.person = person;
+	public Noeud(Stagiaire trainee) {
+		this.trainee = trainee;
 	}
 
 	public int getNbOcc() {
@@ -20,16 +20,16 @@ public class Noeud {
 		this.nbOcc = nbOcc;
 	}
 
-	public void setPerson(Personne person) {
-		this.person = person;
+	public void setTrainee(Stagiaire trainee) {
+		this.trainee = trainee;
 	}
 
-	public Personne getPerson() {
-		return person;
+	public Stagiaire getTrainee() {
+		return trainee;
 	}
 
-	public void setDonnee(Personne person) {
-		this.person = person;
+	public void setDonnee(Stagiaire trainee) {
+		this.trainee = trainee;
 	}
 
 	public Noeud getFg() {

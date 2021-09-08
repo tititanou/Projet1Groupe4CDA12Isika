@@ -1,13 +1,12 @@
 package fr.isika.cda12.annuaire.model;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.isika.cda12.Noeud;
-import fr.isika.cda12.Personne;
 import javafx.collections.ObservableList;
 
 public class Arbre {
@@ -16,32 +15,59 @@ public class Arbre {
 
 	// public Arbre() {}
 
-	public Arbre(String fileName) throws IOException {
-		construire(fileName);
+	public Arbre(String fileName, String critere) throws IOException {
+		construire(fileName, critere);
 	}
 
-	public void ajouter(Personne person) {
-		racine = ajouter(racine, person);
-	}
+	public void ajouter(Stagiaire trainee, String critere) {
+		if(critere.equals("Nom")) {
+			racine = ajouterParNom(racine, trainee);
+			//System.out.println(critere);
+		}
+		else if(critere.equals("Prénom")) {
+			racine = ajouterParPrenom(racine, trainee);
 
-	public Noeud ajouter(Noeud rac, Personne person) {
+		}
+		
+	}
+	
+	public Noeud ajouterParNom(Noeud rac, Stagiaire trainee) {
 		if (rac == null) {
-			Noeud nouveau = new Noeud(person);
+			Noeud nouveau = new Noeud(trainee);
 			return nouveau;
 		}
-		if (person.getNom().compareTo(rac.getPerson().getNom()) < 0) {
-			rac.setFg(ajouter(rac.getFg(), person));
+		if (trainee.getNom().compareTo(rac.getTrainee().getNom()) < 0) {
+			rac.setFg(ajouterParNom(rac.getFg(), trainee));
 		}
-		else if (person.getNom().compareTo(rac.getPerson().getNom()) == 0) {
+		else if (trainee.getNom().compareTo(rac.getTrainee().getNom()) == 0) {
 			rac.setNbOcc(rac.getNbOcc() + 1);
 		}
 		else {
-			rac.setFd(ajouter(rac.getFd(), person));
+			rac.setFd(ajouterParNom(rac.getFd(), trainee));
+		}
+		
+		return rac;
+	}
+	
+	public Noeud ajouterParPrenom(Noeud rac, Stagiaire trainee) {
+		if (rac == null) {
+			Noeud nouveau = new Noeud(trainee);
+			return nouveau;
+		}
+		if (trainee.getPrenom().compareTo(rac.getTrainee().getPrenom()) < 0) {
+			rac.setFg(ajouterParPrenom(rac.getFg(), trainee));
+		}
+		else if (trainee.getPrenom().compareTo(rac.getTrainee().getPrenom()) == 0) {
+			rac.setNbOcc(rac.getNbOcc() + 1);
+		}
+		else {
+			rac.setFd(ajouterParPrenom(rac.getFd(), trainee));
 		}
 		return rac;
 	}
 
-	public void construire(String nomFichier) throws IOException {
+
+	public void construire(String nomFichier, String critere) throws IOException {
 		Scanner lecteur = new Scanner(new File(nomFichier));
 
 		while (lecteur.hasNext()) {
@@ -52,9 +78,9 @@ public class Arbre {
 				nom = splits[1];
 			}
 			String id = System.currentTimeMillis() + prenom + nom;
-			Personne person = new Personne(nom, prenom, id);
-			System.out.println(person.getNom() + " " + person.getPrenom());
-			this.ajouter(person);
+			Stagiaire trainee = new Stagiaire(nom, prenom, id);
+			// System.out.println(trainee.getNom() + " " + trainee.getPrenom());
+			this.ajouter(trainee, critere);
 		}
 	}
 
@@ -79,26 +105,26 @@ public class Arbre {
 	public void ecrireListeTriee(Noeud rac) {
 		if (rac != null) {
 			ecrireListeTriee(rac.getFg());
-			System.out.println(rac.getPerson() + " (" + rac.getNbOcc() + " fois)");
+			System.out.println(rac.getTrainee() + " (" + rac.getNbOcc() + " fois)");
 			ecrireListeTriee(rac.getFd());
 		}
 	}
 
-	public void afficherArbre(ObservableList<Personne> liste) {
+	public void afficherArbre(ObservableList<Stagiaire> liste) {
 		System.out.println("Affichage de l'arbre :\n\n");
 		afficherNoeud(racine, 0, hauteur(), liste);
 		System.out.println();
 	}
 
-	public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel, ObservableList<Personne> liste) {
+	public void afficherNoeud(Noeud currentNoeud, int currentLevel, int maxLevel, ObservableList<Stagiaire> liste) {
 
 		if (currentNoeud != null) {
 			afficherNoeud(currentNoeud.getFg(), currentLevel + 1, maxLevel, liste);
 			for (int i = 0; i < (maxLevel - currentLevel - 1); i++) {
 				// System.out.print(" ");
 			}
-			liste.add(currentNoeud.getPerson());
-			System.out.println(currentNoeud.getPerson());
+			liste.add(currentNoeud.getTrainee());
+			System.out.println(currentNoeud.getTrainee());
 			afficherNoeud(currentNoeud.getFd(), currentLevel + 1, maxLevel, liste);
 		} else {
 			if (currentLevel < maxLevel) {
@@ -125,21 +151,21 @@ public class Arbre {
 		return currentNoeud;
 	}
 
-	public void supprimer(Personne person) {
-		racine = supprimer(racine, person);
+	public void supprimer(Stagiaire trainee) {
+		racine = supprimer(racine, trainee);
 	}
 
-	public Noeud supprimer(Noeud currentNoeud, Personne person) {
+	public Noeud supprimer(Noeud currentNoeud, Stagiaire trainee) {
 		if (currentNoeud == null)
 			return currentNoeud;
-		if (currentNoeud.getPerson().getId().compareTo(person.getId()) == 0) {
+		if (currentNoeud.getTrainee().getId().compareTo(trainee.getId()) == 0) {
 			return supprimerRacine(currentNoeud);
 		}
-		if (currentNoeud.getPerson().getId().compareTo(person.getId()) > 0) {
-			currentNoeud.setFg(supprimer(currentNoeud.getFg(), person));
+		if (currentNoeud.getTrainee().getId().compareTo(trainee.getId()) > 0) {
+			currentNoeud.setFg(supprimer(currentNoeud.getFg(), trainee));
 		}
-		if (currentNoeud.getPerson().getId().compareTo(person.getId()) < 0) {
-			currentNoeud.setFd(supprimer(currentNoeud.getFd(), person));
+		if (currentNoeud.getTrainee().getId().compareTo(trainee.getId()) < 0) {
+			currentNoeud.setFd(supprimer(currentNoeud.getFd(), trainee));
 		}
 		return currentNoeud;
 	}
@@ -154,34 +180,34 @@ public class Arbre {
 		else if (currentNoeud.getFg() == null && currentNoeud.getFd() != null)
 			return currentNoeud.getFd();
 		else {
-			currentNoeud.setPerson(successeur(currentNoeud).getPerson());
-			currentNoeud.setFd(supprimer(currentNoeud.getFd(), currentNoeud.getPerson()));
+			currentNoeud.setTrainee(successeur(currentNoeud).getTrainee());
+			currentNoeud.setFd(supprimer(currentNoeud.getFd(), currentNoeud.getTrainee()));
 			return currentNoeud;
 		}
 
 	}
 
-	public void modifier(Personne exPerson, Personne newPerson) {
-		this.supprimer(exPerson);
-		this.ajouter(newPerson);
+	public void modifier(Stagiaire exTrainee, Stagiaire newTrainee) {
+		this.supprimer(exTrainee);
+		this.ajouter(newTrainee, "Nom");
 	}
 
-	public List<Personne> rechercher_liste(String selec, String valeur) {
-		List<Personne> listeRetour = new ArrayList<Personne>();
+	public List<Stagiaire> rechercher_liste(String selec, String valeur) {
+		List<Stagiaire> listeRetour = new ArrayList<Stagiaire>();
 		return rechercher_liste_annexe(listeRetour, racine, selec, valeur);
 	}
 
-	public List<Personne> rechercher_liste_annexe(List<Personne> listRetour, Noeud currentNoeud, String selec,
+	public List<Stagiaire> rechercher_liste_annexe(List<Stagiaire> listRetour, Noeud currentNoeud, String selec,
 			String valeur) {
 
 		if (selec.equals("nom")) {
 			if (currentNoeud == null)
 				return listRetour;
-			else if (currentNoeud.getPerson().getNom().compareTo(valeur) == 0) {
-				listRetour.add(currentNoeud.getPerson());
+			else if (currentNoeud.getTrainee().getNom().compareTo(valeur) == 0) {
+				listRetour.add(currentNoeud.getTrainee());
 				rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
 				return listRetour;
-			} else if (currentNoeud.getPerson().getNom().compareTo(valeur) > 0) {
+			} else if (currentNoeud.getTrainee().getNom().compareTo(valeur) > 0) {
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFg(), selec, valeur);
 			} else {
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
@@ -190,11 +216,11 @@ public class Arbre {
 		else if (selec.equals("prenom")) {
 			if (currentNoeud == null)
 				return listRetour;
-			else if (currentNoeud.getPerson().getPrenom().compareTo(valeur) == 0) {
-				listRetour.add(currentNoeud.getPerson());
+			else if (currentNoeud.getTrainee().getPrenom().compareTo(valeur) == 0) {
+				listRetour.add(currentNoeud.getTrainee());
 				rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
 				return listRetour;
-			} else if (currentNoeud.getPerson().getPrenom().compareTo(valeur) > 0) {
+			} else if (currentNoeud.getTrainee().getPrenom().compareTo(valeur) > 0) {
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFg(), selec, valeur);
 			} else {
 				return rechercher_liste_annexe(listRetour, currentNoeud.getFd(), selec, valeur);
