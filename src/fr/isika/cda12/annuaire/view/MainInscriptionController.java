@@ -43,9 +43,8 @@ public class MainInscriptionController implements Initializable {
 
 	@FXML
 	private Button btnValidate;
-	
+
 	List<Personne> usersList;
-	
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
@@ -61,7 +60,6 @@ public class MainInscriptionController implements Initializable {
 		} else if (event.getSource() == btnValidate) {
 			// System.out.println(tfNom.getText() + tfPrenom.getText());
 
-			
 			boolean resultat = Personne.creerCompte(tfNom.getText(), tfPrenom.getText(), tfMotDePasse.getText(),
 					tfMotDePasse2.getText());
 
@@ -80,18 +78,21 @@ public class MainInscriptionController implements Initializable {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
-				FileManager.updateFile("usersFile" , "person," + person.toString());
 
-				Parent mainStagiaire_parent = FXMLLoader.load(getClass().getResource("MainStagiaire.fxml"));
+				FileManager.updateFile("usersFile", "person," + person.toString());
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("MainStagiaire.fxml"));
+				Parent mainStagiaire_parent = loader.load();
+				MainStagiaireController controller = loader.getController();
+				controller.transferUser(person);
 				Scene mainStagiaire_scene = new Scene(mainStagiaire_parent);
+				mainStagiaire_scene.setUserData(mainStagiaire_scene);
 				Stage inscr_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				inscr_stage.hide();
 				inscr_stage.setScene(mainStagiaire_scene);
 				inscr_stage.show();
 
-			}
-			else {
+			} else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Erreur MdP");
 				alert.setContentText("Les mots de passe ne correspondent pas!");

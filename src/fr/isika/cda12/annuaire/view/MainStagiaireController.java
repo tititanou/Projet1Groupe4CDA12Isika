@@ -72,7 +72,9 @@ public class MainStagiaireController implements Initializable {
 	private TableColumn<Stagiaire, String> colPrenom;
 	
 	File fileStudents;
-
+	
+	Personne usr;
+	Boolean conected;
 	// Reference to the main application.
 	// private MainStagiaireOverview mainStagiaire;
 
@@ -82,12 +84,15 @@ public class MainStagiaireController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
+		
 		afficherStagiaire();
 		fileStudents = prePrint(getStagiaires());
 		
 		showStagiaireDetails(null);
 		tvStagiaire.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showStagiaireDetails(newValue));
+		System.out.println(usr + " coucou");
+		//transferUser(usr);
 	}
 
 	@FXML
@@ -209,6 +214,12 @@ public class MainStagiaireController implements Initializable {
             emailLabel.setText("");
             
         }
+        System.out.println(usr);
     }
+	
+	public void transferUser(Personne user) {
+		usr = user;
+		System.out.println(usr.toString());
+	}
 
 }
