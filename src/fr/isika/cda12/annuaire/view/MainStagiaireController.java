@@ -98,9 +98,13 @@ public class MainStagiaireController implements Initializable {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 
 		if (event.getSource() == btnSimpleSearch) {
-
-			Parent simpleSearch_parent = FXMLLoader.load(getClass().getResource("SimpleSearchStagiaire.fxml"));
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SimpleSearchStagiaire.fxml"));
+			//Parent simpleSearch_parent = FXMLLoader.load(getClass().getResource("SimpleSearchStagiaire.fxml"));
+			Parent simpleSearch_parent= loader.load();
 			Scene simpleSearch_scene = new Scene(simpleSearch_parent);
+			MainStagiaireController controller = loader.getController();
+			controller.transferUser(usr);
 			Stage ms_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			ms_stage.hide();
 			ms_stage.setScene(simpleSearch_scene);
@@ -114,8 +118,12 @@ public class MainStagiaireController implements Initializable {
 			ms_stage.show();
 		} else if (event.getSource() == btnDeco){
 			deconnecter();
-			Parent hp_parent = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+			FXMLLoader loader= new FXMLLoader(getClass().getResource("HomePage.fxml"));
+			Parent hp_parent= loader.load();
+			//Parent hp_parent = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
 			Scene hp_scene = new Scene (hp_parent);
+			MainStagiaireController controller= loader.getController();
+			controller.transferUser(null);
 			Stage ms_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			ms_stage.hide();
 			ms_stage.setScene(hp_scene);

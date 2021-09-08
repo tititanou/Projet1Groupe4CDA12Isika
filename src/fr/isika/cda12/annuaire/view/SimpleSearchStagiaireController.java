@@ -25,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class SimpleSearchStagiaireController implements Initializable {
+	Personne user;
 
 	@FXML
 	ComboBox<String> comBoxCriteres;
@@ -149,6 +150,10 @@ public class SimpleSearchStagiaireController implements Initializable {
 			return null;
 		}
 
+	}
+	public void transferUser(Personne user) {
+		this.user = user;
+		System.out.println(user.toString());
 	}
 
 }
