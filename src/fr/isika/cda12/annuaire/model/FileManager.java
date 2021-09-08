@@ -9,8 +9,6 @@ import fr.isika.cda12.Administrateur;
 public class FileManager {
 
 	public static void readFile(String fileName, List<Personne> usersList) {
-		
-		usersList = new ArrayList<>();
 
 		File file = new File(fileName);
 		if (!file.exists()) {
@@ -32,12 +30,9 @@ public class FileManager {
 					usersList.add(user);
 				}else if (userDatas[0].equals("person")){
 					Personne user = new Personne(userDatas[1], userDatas[2], userDatas[4]);
-					System.out.println(usersList);
-					System.out.println(user.toString());
 					usersList.add(user);
 				} 
 
-				System.out.println(data);
 			}
 			myReader.close();
 		} catch (FileNotFoundException e) {

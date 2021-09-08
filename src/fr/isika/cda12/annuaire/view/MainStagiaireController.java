@@ -74,7 +74,6 @@ public class MainStagiaireController implements Initializable {
 	File fileStudents;
 	
 	Personne usr;
-	Boolean conected;
 	// Reference to the main application.
 	// private MainStagiaireOverview mainStagiaire;
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import fr.isika.cda12.annuaire.model.Arbre;
+import fr.isika.cda12.annuaire.model.Personne;
 import fr.isika.cda12.annuaire.model.Stagiaire;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,6 +69,7 @@ public class MainAdministrateurController implements Initializable {
 	private TableColumn<Stagiaire, String> colPrenom;
 	
 	File fileStudents;
+	Personne usr;
 	
 	public MainAdministrateurController() {
 	}
@@ -201,5 +203,10 @@ public class MainAdministrateurController implements Initializable {
             
         }
     }
+	
+	public void transferUser(Personne user) {
+		usr = user;
+		//System.out.println(usr.toString());
+	}
 
 }
