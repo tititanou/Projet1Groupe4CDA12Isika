@@ -4,12 +4,14 @@ import java.io.*;
 
 import java.util.*;
 
+import com.apple.eawt.UserSessionListener;
+
 
 public class FileManager {
 	
 	
 
-	public static void readFile(String fileName) {
+	public static void readFile(String fileName, List<Personne> usersList) {
 		
 		File file = new File(fileName);
 		Scanner myReader;
@@ -17,6 +19,9 @@ public class FileManager {
 			myReader = new Scanner(file);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
+				String[] userDatas = data.split(",");
+				Personne user = new Personne(userDatas[0],userDatas[1],userDatas[2]);
+				usersList.add(user);
 				System.out.println(data);
 			}
 			myReader.close();

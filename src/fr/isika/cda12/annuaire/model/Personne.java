@@ -31,7 +31,7 @@ public class Personne {
 	}
 	
 	
-	public boolean creerCompte ( String lastName, String firstName, String pwd1, String pwd2) {
+	public static boolean creerCompte ( String lastName, String firstName, String pwd1, String pwd2) {
 		
 		boolean result;
 		
