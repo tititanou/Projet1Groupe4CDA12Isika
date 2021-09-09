@@ -3,6 +3,7 @@ package fr.isika.cda12.annuaire.view;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,7 +45,7 @@ public class MainInscriptionController implements Initializable {
 	@FXML
 	private Button btnValidate;
 
-	List<Personne> usersList;
+	List<Personne> usersList = new ArrayList<>();
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {

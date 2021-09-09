@@ -6,6 +6,8 @@ import java.util.*;
 
 import com.apple.eawt.UserSessionListener;
 
+import fr.isika.cda12.annuaire.model.Personne;
+
 
 public class FileManager {
 	

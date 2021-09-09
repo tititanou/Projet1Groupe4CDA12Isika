@@ -30,11 +30,11 @@
       </TableView>
       <ButtonBar layoutX="15.0" layoutY="369.0" prefHeight="66.0" prefWidth="258.0">
          <buttons>
-            <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="120.0" text="Imprimer">
+            <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="75.0" text="Imprimer">
                <font>
                   <Font size="11.0" />
                </font></Button>
-            <Button fx:id="btnSimpleSearch" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="75.0" text="Recherche&#10;simple" textAlignment="CENTER">
+            <Button fx:id="btnSimpleSearch" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="75.0" text="Recherche&#10;simple" textAlignment="CENTER">
                <font>
                   <Font size="11.0" />
                </font></Button>
@@ -65,21 +65,21 @@
          </rowConstraints>
          <children>
             <Label text="Prénom" GridPane.rowIndex="1" />
-            <Label fx:id="nomLabel" text="Label" GridPane.columnIndex="1" />
-            <Label fx:id="prenomLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="nomLabel" GridPane.columnIndex="1" />
+            <Label fx:id="prenomLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Téléphone" GridPane.rowIndex="2" />
-            <Label fx:id="telLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="telLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Email" GridPane.rowIndex="3" />
-            <Label fx:id="emailLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="emailLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Nom" />
             <Label text="Adresse" GridPane.rowIndex="4" />
             <Label text="Ville" GridPane.rowIndex="5" />
             <Label text="Code postal" GridPane.rowIndex="6" />
-            <Label fx:id="emailLabel1" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="emailLabel2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label fx:id="emailLabel3" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="emailLabel1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="emailLabel2" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="emailLabel3" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label fx:id="emailLabel4" text="Date de naissance" GridPane.rowIndex="7" />
-            <Label fx:id="emailLabel5" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="emailLabel5" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="349.0" layoutY="60.0" text="Informations sur la personne">
@@ -89,15 +89,15 @@
       </Label>
       <ButtonBar layoutX="305.0" layoutY="365.0" prefHeight="66.0" prefWidth="258.0">
          <buttons>
-            <Button fx:id="btnPrint1" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="100.0" style="-fx-background-radius: 3em;" text="Nouveau">
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="90.0" style="-fx-background-radius: 3em;" text="Nouveau">
                <font>
                   <Font size="11.0" />
                </font></Button>
-            <Button fx:id="btnSimpleSearch1" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="75.0" style="-fx-background-radius: 3em;" text="Modifier" textAlignment="CENTER">
+            <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="90.0" style="-fx-background-radius: 3em;" text="Modifier" textAlignment="CENTER">
                <font>
                   <Font size="11.0" />
                </font></Button>
-            <Button fx:id="btnAdvSearch1" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="90.0" style="-fx-background-radius: 3em;" text="Effacer" textAlignment="CENTER">
+            <Button fx:id="btnDel" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="90.0" style="-fx-background-radius: 3em;" text="Effacer" textAlignment="CENTER">
                <font>
                   <Font size="11.0" />
                </font></Button>

@@ -2,7 +2,7 @@ package fr.isika.cda12.annuaire.model;
 
 import java.io.IOException;
 
-
+import fr.isika.cda12.Arbre;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

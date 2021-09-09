@@ -9,18 +9,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2AACB2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.MainHomePageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2AACB2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda12.annuaire.view.MainHomePageController">
    <children>
-      <ImageView fitHeight="158.0" fitWidth="231.0" layoutX="181.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0">
+      <ImageView fitHeight="158.0" fitWidth="231.0" layoutX="201.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0">
          <image>
-            <Image url="@../../../../../../../../../../../Users/pagac/Desktop/Isika/Projet/logo%20Isika.png" />
+            <Image url="@../../../../../../assets/logo%20Isika.png" />
          </image>
       </ImageView>
       <HBox alignment="CENTER" layoutX="14.0" layoutY="24.0" prefHeight="100.0" prefWidth="560.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
             <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="54.0" prefWidth="491.0" text="Bienvenue sur l'annuaire des stagiaires " textFill="#131215">
                <font>
-                  <Font name="Rage Italic" size="33.0" />
+                  <Font name="Trattatello" size="33.0" />
                </font>
             </Label>
          </children>
@@ -39,5 +39,6 @@
             </Button>
          </buttons>
       </ButtonBar>
+      <Button fx:id="btnHelp" layoutX="531.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Help" />
    </children>
 </AnchorPane>

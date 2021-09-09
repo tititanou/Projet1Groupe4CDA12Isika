@@ -1,15 +1,19 @@
 package fr.isika.cda12.annuaire.view;
 
 import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import fr.isika.cda12.Arbre;
-import fr.isika.cda12.Personne;
+import fr.isika.cda12.annuaire.model.Arbre1;
+import fr.isika.cda12.annuaire.model.Personne;
+import fr.isika.cda12.annuaire.model.Stagiaire;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,13 +44,13 @@ public class SimpleSearchStagiaireController implements Initializable {
 	Button btnPrint;
 
 	@FXML
-	TableView<Personne> tvStagiaire;
+	TableView<Stagiaire> tvStagiaire;
 
 	@FXML
-	TableColumn<Personne, String> colPrenom;
+	TableColumn<Stagiaire, String> colPrenom;
 
 	@FXML
-	TableColumn<Personne, String> colNom;
+	TableColumn<Stagiaire, String> colNom;
 
 	File fileStudents;
 
@@ -74,9 +78,10 @@ public class SimpleSearchStagiaireController implements Initializable {
 	private void handleButtonAction(ActionEvent event) {
 
 		if (event.getSource() == btnSearch) {
-			List<Personne> students = rechercher();
-			fileStudents = prePrint(students);
+			List<Stagiaire> students = rechercher();
+			
 			afficherStagiaire(students);
+			fileStudents = prePrint(students);
 		} else if (event.getSource() == btnPrint) {
 			if (fileStudents != null) {
 				imprimer(fileStudents);
@@ -89,14 +94,17 @@ public class SimpleSearchStagiaireController implements Initializable {
 		}
 	}
 
-	private List<Personne> rechercher() {
-
+	private List<Stagiaire> rechercher() {
+		List<Stagiaire> stagiaireListe = new ArrayList<>();
 		String critere = comBoxCriteres.getValue();
+		System.out.println(critere);
 		String valeur = tfSearchSt.getText();
-		Arbre arbre;
+		Arbre1 arbre;
 		try {
-			arbre = new Arbre("assets/noms.txt", critere);
-			return arbre.rechercher_liste(critere, valeur);
+			arbre = new Arbre1("assets/noms.txt", critere);
+			arbre.rechercher_liste(critere, valeur, stagiaireListe);
+			System.out.println(stagiaireListe.size());
+			return stagiaireListe;
 		} catch (IOException e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Echec de la lecture du fichier");
@@ -106,12 +114,12 @@ public class SimpleSearchStagiaireController implements Initializable {
 		}
 	}
 
-	public void afficherStagiaire(List<Personne> list) {
+	public void afficherStagiaire(List<Stagiaire> list) {
 		try {
 
-			colPrenom.setCellValueFactory(new PropertyValueFactory<Personne, String>("prenom"));
+			colPrenom.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("prenom"));
 
-			colNom.setCellValueFactory(new PropertyValueFactory<Personne, String>("nom"));
+			colNom.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("nom"));
 
 			tvStagiaire.getItems().clear();
 			tvStagiaire.getItems().addAll(list);
@@ -130,7 +138,7 @@ public class SimpleSearchStagiaireController implements Initializable {
 		}
 	}
 
-	private File prePrint(List<Personne> list) {
+	private File prePrint(List<Stagiaire> list) {
 
 		String fileName = "Liste d'étudiants " + System.currentTimeMillis();
 		File file = new File(fileName);
@@ -139,7 +147,7 @@ public class SimpleSearchStagiaireController implements Initializable {
 
 			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			for (Personne person : list) {
+			for (Stagiaire person : list) {
 				bw.write("Nom: " + person.getNom() + "\nPrénom: " + person.getPrenom()
 						+ "\n-------------------------------------------------\n");
 			}

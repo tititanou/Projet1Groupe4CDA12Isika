@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import fr.isika.cda12.annuaire.model.Arbre;
+import fr.isika.cda12.annuaire.model.Arbre1;
 import fr.isika.cda12.annuaire.model.Personne;
 import fr.isika.cda12.annuaire.model.Stagiaire;
 import javafx.collections.FXCollections;
@@ -103,7 +103,7 @@ public class MainStagiaireController implements Initializable {
 			//Parent simpleSearch_parent = FXMLLoader.load(getClass().getResource("SimpleSearchStagiaire.fxml"));
 			Parent simpleSearch_parent= loader.load();
 			Scene simpleSearch_scene = new Scene(simpleSearch_parent);
-			MainStagiaireController controller = loader.getController();
+			SimpleSearchStagiaireController controller = loader.getController();
 			controller.transferUser(usr);
 			Stage ms_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			ms_stage.hide();
@@ -117,12 +117,11 @@ public class MainStagiaireController implements Initializable {
 			ms_stage.setScene(advSearch_scene);
 			ms_stage.show();
 		} else if (event.getSource() == btnDeco){
-			deconnecter();
 			FXMLLoader loader= new FXMLLoader(getClass().getResource("HomePage.fxml"));
 			Parent hp_parent= loader.load();
 			//Parent hp_parent = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
 			Scene hp_scene = new Scene (hp_parent);
-			MainStagiaireController controller= loader.getController();
+			MainHomePageController controller= loader.getController();
 			controller.transferUser(null);
 			Stage ms_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			ms_stage.hide();
@@ -133,11 +132,6 @@ public class MainStagiaireController implements Initializable {
 		} else {
 			System.out.println("veuillez réessayer");
 		}
-		
-	}
-
-	private void deconnecter() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -154,9 +148,9 @@ public class MainStagiaireController implements Initializable {
 
 		ObservableList<Stagiaire> stagiaireListe = FXCollections.observableArrayList();
 
-		Arbre arbre;
+		Arbre1 arbre;
 		try {
-			arbre = new Arbre("assets/noms.txt", "Nom");
+			arbre = new Arbre1("assets/noms.txt", "Nom");
 			arbre.afficherArbre(stagiaireListe);
 		} catch (IOException e) {
 			Alert alert = new Alert(AlertType.ERROR);

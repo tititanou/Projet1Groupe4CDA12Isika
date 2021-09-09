@@ -75,22 +75,22 @@ public class Stagiaire {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.id = id;
-		this.tel = null;
-		this.email = null;
+		this.tel = "";
+		this.email = "";
 	}
 	
 	public Stagiaire(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.id = null;
-		this.tel = null;
-		this.email = null;
+		this.id = System.currentTimeMillis() + prenom + nom;
+		this.tel = "";
+		this.email = "";
 	}
 	
 	@Override
 	public String toString() {
 		
-		return this.nom + " " + this.prenom;
+		return this.nom + "," + this.prenom + "," +this.id + "," + this.tel + "," + this.email;
 	}
 	
 
