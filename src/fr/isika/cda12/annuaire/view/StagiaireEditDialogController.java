@@ -42,6 +42,10 @@ public class StagiaireEditDialogController {
 	    private void initialize() {
 	    }
 	    
+	    public void setDialogStage(Stage dialogStage) {
+	        this.dialogStage = dialogStage;
+	    }
+	    
 	    public void setStagiaire(Stagiaire trainee) {
 	        this.trainee = trainee;
 
