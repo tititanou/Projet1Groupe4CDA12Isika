@@ -1,6 +1,7 @@
 package fr.isika.cda12.annuaire.view;
 
 import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +9,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
 import fr.isika.cda12.Arbre;
+import fr.isika.cda12.annuaire.MainAdministrateur;
 import fr.isika.cda12.annuaire.model.Administrateur;
 import fr.isika.cda12.annuaire.model.Arbre1;
 import fr.isika.cda12.annuaire.model.Personne;
@@ -45,14 +48,14 @@ public class MainAdministrateurController implements Initializable {
 	@FXML
 	private Button btnDeco;
 
-	@FXML
-	private Button btnAdd;
-
-	@FXML
-	private Button btnUpdate;
-
-	@FXML
-	private Button btnDel;
+//	@FXML
+//	private Button btnAdd;
+//
+//	@FXML
+//	private Button btnUpdate;
+//
+//	@FXML
+//	private Button btnDel;
 
 	@FXML
 	private Label prenomLabel;
@@ -78,6 +81,8 @@ public class MainAdministrateurController implements Initializable {
 	File fileStudents;
 	Personne usr;
 	Arbre1 arbre;
+	
+	private MainAdministrateur mainAdministrateur;
 
 	public MainAdministrateurController() {
 	}
@@ -207,6 +212,54 @@ public class MainAdministrateurController implements Initializable {
 
 		}
 	}
+	
+	@FXML
+    private void handleNewStagiaire() {
+        Stagiaire tempPerson = new Stagiaire();
+        boolean okClicked = mainAdministrateur.showStagiaireEditDialog(tempPerson);
+        if (okClicked) {
+        	mainAdministrateur.getTraineeData().add(tempPerson);
+        }
+    }
+	
+	@FXML
+	private void handleEditStagiaire() {
+	    Stagiaire selectedTrainee = tvStagiaire.getSelectionModel().getSelectedItem();
+	    if (selectedTrainee != null) {
+	        boolean okClicked = mainAdministrateur.showStagiaireEditDialog(selectedTrainee);
+	        if (okClicked) {
+	            showStagiaireDetails(selectedTrainee);
+	        }
+
+	    } else {
+	       
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(mainAdministrateur.getPrimaryStage());
+	        alert.setTitle("Aucune sélection");
+	        alert.setHeaderText("Aucune stagiaire sélectionné");
+	        alert.setContentText("Veuillez sélectionner un stagiaire dans la liste.");
+
+	        alert.showAndWait();
+	    }
+	}
+	
+	@FXML
+	private void handleDeleteStagiaire() {
+	    int selectedIndex = tvStagiaire.getSelectionModel().getSelectedIndex();
+	    if (selectedIndex >= 0) {
+	    tvStagiaire.getItems().remove(selectedIndex);
+	    } else {
+	        // Nothing selected.
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(mainAdministrateur.getPrimaryStage());
+	        alert.setTitle("Aucune sélection");
+	        alert.setHeaderText("Aucun stagiaire sélectionné");
+	        alert.setContentText("Veuillez sélectionner un stagiaire dans la liste.");
+
+	        alert.showAndWait();
+	    }
+	}
+	
 
 	private void ajouter() {
 		Administrateur admin = (Administrateur) usr;

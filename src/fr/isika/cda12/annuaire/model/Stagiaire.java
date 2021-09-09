@@ -7,6 +7,10 @@ public class Stagiaire {
 	private String id;
 	private String tel;
 	private String email;
+	private String adresse;
+	private String ville;
+	private String codePostal;
+	private String birthday;
 
 
 
@@ -56,6 +60,22 @@ public class Stagiaire {
 		this.email = email;
 	}
 
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
 	public Stagiaire() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -63,12 +83,30 @@ public class Stagiaire {
 
 	
 
+	public Stagiaire(String nom, String prenom, String id, String tel, String email, String adresse, String ville,
+			String codePostal, String birthday) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.id = id;
+		this.tel = tel;
+		this.email = email;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.codePostal = codePostal;
+		this.birthday = birthday;
+	}
+
 	public Stagiaire(String nom, String prenom, String id, String tel, String email) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.id =id;
 		this.tel = tel;
 		this.email = email;
+		this.adresse = "";
+		this.ville = "";
+		this.codePostal = "";
+		this.birthday = "";
 	}
 	
 	public Stagiaire(String nom, String prenom, String id) {
@@ -77,6 +115,10 @@ public class Stagiaire {
 		this.id = id;
 		this.tel = "";
 		this.email = "";
+		this.adresse = "";
+		this.ville = "";
+		this.codePostal = "";
+		this.birthday = "";
 	}
 	
 	public Stagiaire(String nom, String prenom) {
@@ -85,12 +127,17 @@ public class Stagiaire {
 		this.id = System.currentTimeMillis() + prenom + nom;
 		this.tel = "";
 		this.email = "";
+		this.adresse = "";
+		this.ville = "";
+		this.codePostal = "";
+		this.birthday = "";
 	}
 	
 	@Override
 	public String toString() {
 		
-		return this.nom + "," + this.prenom + "," +this.id + "," + this.tel + "," + this.email;
+		return this.nom + "," + this.prenom + "," +this.id + "," + this.tel + "," + this.email + "," + this.adresse
+				 + "," + this.ville + "," + this.codePostal + "," + this.birthday;
 	}
 	
 
